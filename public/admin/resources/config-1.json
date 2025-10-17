@@ -1,0 +1,36 @@
+{
+    "applebox":
+    {
+        "addr": {"basic":"서울 마포구 상암동","zipNo":"12345","detail":"누리꾼스케어 11 층 스페이스 1호 "},
+        "hp": "000-000-0000",
+        "location": "37.579466, 126.889290",
+        "name": "상암동 보관함",
+        "status": "A",
+        "sshHost":"125.209.200.159",
+        "sshPort":"2222"
+    },
+    "cabinet":
+    [
+     {
+     "box": [
+             {"col": 0,"row": 0,"jumper": 2,"serial": 1,"width": 500,"depth": 600,"height": 300,"kind": "B","label": "A5","status": "B"},
+             {"col": 0,"row": 1,"jumper": 2,"serial": 2,"width": 500,"depth": 600,"height": 300,"kind": "B","label": "A4","status": "B"},
+             {"col": 0,"row": 2,"jumper": 2,"serial": 3,"width": 500,"depth": 600,"height": 300,"kind": "B","label": "A3","status": "B"},
+             {"col": 0,"row": 3,"jumper": 2,"serial": 4,"width": 500,"depth": 600,"height": 300,"kind": "B","label": "A2","status": "B"},
+             {"col": 0,"row": 4,"jumper": 2,            "width": 500,"depth": 600,"height": 300,"kind": "A","label": "KO","status": "C"},
+             {"col": 0,"row": 5,"jumper": 2,"serial": 5,"width": 500,"depth": 600,"height": 300,"kind": "B","label": "A1","status": "B"}
+             ],
+     "label": "A"
+     },
+     {
+     "box": [
+             {"col": 1,"row": 0,"jumper": 2,"serial": 6, "width": 500,"depth": 600,"height": 600,"kind": "A","label": "NO","status": "C"},
+             {"col": 1,"row": 1,"jumper": 2,"serial": 7, "width": 500,"depth": 600,"height": 300,"kind": "B","label": "B4","status": "B"},
+             {"col": 1,"row": 2,"jumper": 2,"serial": 8, "width": 500,"depth": 600,"height": 300,"kind": "B","label": "B3","status": "B"},
+             {"col": 1,"row": 3,"jumper": 2,"serial": 9, "width": 500,"depth": 600,"height": 300,"kind": "B","label": "B2","status": "B"},
+             {"col": 1,"row": 4,"jumper": 2,"serial": 10,"width": 500,"depth": 600,"height": 300,"kind": "B","label": "B1","status": "B"}
+             ],
+     "label": "B"
+     }
+     ]
+}
