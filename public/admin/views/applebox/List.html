@@ -1,0 +1,173 @@
+<!-- ===============================
+     Applebox 납품처 목록 모듈
+=============================== -->
+<div ng-controller="AppleboxListCtrl">
+  <!-- ===============================
+       상단 헤더: 페이지 제목 & 로그인 상태
+  ================================ -->
+  <div
+    class="row wrapper border-bottom white-bg page-heading"
+    ng-init="checkAuth()"
+  >
+    <div class="col-lg-10">
+      <h2>설치 목록</h2>
+      <ol class="breadcrumb">
+        <li><a ui-sref="home">보관함</a></li>
+        <li class="active"><strong>설치 목록</strong></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ===============================
+       메인 콘텐츠: 로그인된 경우
+  ================================ -->
+  <div
+    class="wrapper wrapper-content animated fadeInRight ecommerce"
+    ng-if="currentUser"
+  >
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox">
+          <!-- ibox-title: 제목 + 버튼 -->
+          <div class="ibox-title">
+            <h5>설치 목록</h5>
+            <div class="ibox-tools">
+              <a ui-sref="applebox.detail" class="btn btn-primary btn-sm">
+                보관함 상세등록
+              </a>
+              <a ui-sref="applebox.edit" class="btn btn-primary btn-sm">
+                보관함 등록
+              </a>
+            </div>
+          </div>
+
+          <!-- ibox-content -->
+          <div class="ibox-content">
+            <!-- 검색 폼 -->
+            <div class="row m-b-sm m-t-sm">
+              <form class="m-t" role="form" ng-submit="formSubmit()">
+                <div class="col-sm-3">
+                  <input
+                    type="text"
+                    ng-model="sform.name"
+                    placeholder="이름"
+                    class="form-control"
+                  />
+                </div>
+                <div class="col-sm-2">
+                  <button class="btn btn-primary" type="submit">검색</button>
+                </div>
+              </form>
+            </div>
+
+            <!-- 목록 테이블 -->
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>락커설정</th>
+                    <th>락커현황</th>
+                    <th>로그</th>
+                    <th>영상</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in list">
+                    <td>
+                      <a ui-sref="applebox.status({yid:item.yid})"
+                        >{{item.yid}}</a
+                      >
+                    </td>
+                    <td>
+                      <a ui-sref="applebox.edit(item)">{{item.location}}</a>
+                    </td>
+                    <td>
+                      <a ui-sref="applebox.setting(item)">설정</a>
+                    </td>
+                    <td>
+                      <a ui-sref="applebox.view(item)">현황</a>
+                    </td>
+                    <td>
+                      <a ui-sref="applebox.saveloglist({yid:item.yid})">보관</a
+                      >,
+                      <a ui-sref="applebox.takeloglist({yid:item.yid})">수령</a>
+                    </td>
+                    <td style="vertical-align: middle">
+                      <input
+                        type="button"
+                        ng-click="camera(item)"
+                        value="관제"
+                      />
+                    </td>
+                  </tr>
+
+                  <!-- 데이터 없음 표시 -->
+                  <tr ng-show="list.length==0">
+                    <td colspan="6" class="text-center">
+                      더 이상 데이터가 없습니다.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- 페이지네이션 -->
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <pagination
+                  ng-change="pageChanged(currentPage)"
+                  total-items="totalItems"
+                  ng-model="currentPage"
+                  next-text="다음"
+                  previous-text="이전"
+                  first-text="처음"
+                  last-text="마지막"
+                  max-size="maxSize"
+                  items-per-page="display"
+                  class="pagination-sm"
+                  boundary-links="true"
+                  rotate="false"
+                  num-pages="numPages"
+                >
+                </pagination>
+              </div>
+            </div>
+          </div>
+          <!-- ibox-content -->
+        </div>
+        <!-- ibox -->
+      </div>
+      <!-- col -->
+    </div>
+    <!-- row -->
+  </div>
+
+  <!-- ===============================
+       로그인 안 됐을 경우
+  =============================== -->
+  <div class="text-center" ng-if="!currentUser" style="margin-top: 50px">
+    <h3>로그인이 필요합니다.</h3>
+    <a href="#/login" class="btn btn-primary">로그인 페이지로 이동</a>
+  </div>
+</div>
+
+<!-- ===============================
+     CSS 추가
+=============================== -->
+<style>
+  .wrapper-content {
+    min-height: 100vh; /* 화면 전체 높이 */
+    background-color: #fff; /* 전체 영역 하얗게 */
+    padding: 15px; /* 상하좌우 여백 */
+  }
+
+  .wrapper-content .row {
+    background-color: inherit; /* 부모 배경 상속 */
+  }
+
+  .wrapper-content .col-lg-12 {
+    background-color: inherit; /* 부모 배경 상속 */
+  }
+</style>

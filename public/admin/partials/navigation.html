@@ -1,0 +1,58 @@
+<!-- ============================= -->
+<!--  왼쪽 사이드 네비게이션 (Sidebar) -->
+<!-- ============================= -->
+<nav class="navbar-default navbar-static-side" role="navigation">
+  <div class="sidebar-collapse">
+    <ul side-navigation class="nav metismenu" id="side-menu">
+      <li class="nav-header">
+        <div class="profile-element">
+          <span class="clear">
+            <span class="block m-t-xs">
+              <strong class="font-bold">{{globals.currentUser.userId}}</strong>
+            </span>
+            <span class="text-muted text-xs block">관리자 메뉴</span>
+          </span>
+        </div>
+      </li>
+
+      <!-- 보관함 -->
+      <li ng-class="{active: $state.includes('applebox')}">
+        <a ui-sref="applebox.list">
+          <i class="fa fa-lock" aria-hidden="true"></i>
+          <span class="nav-label">보관함</span>
+          <span class="fa arrow"></span>
+        </a>
+        <ul
+          class="nav nav-second-level collapse"
+          ng-class="{in: $state.includes('applebox')}"
+        >
+          <li ui-sref-active="active">
+            <a ui-sref="applebox.list">설치목록</a>
+          </li>
+          <li ui-sref-active="active">
+            <a ui-sref="applebox.saveloglist">보관로그</a>
+          </li>
+          <li ui-sref-active="active">
+            <a ui-sref="applebox.takeloglist">수령로그</a>
+          </li>
+        </ul>
+      </li>
+
+      <!-- 공지사항 -->
+      <li ng-class="{active: $state.includes('laundry')}">
+        <a ui-sref="laundry.noticelist">
+          <i class="fa fa-comments" aria-hidden="true"></i>
+          <span class="nav-label">공지사항</span>
+        </a>
+      </li>
+
+      <!-- VPN 목록 -->
+      <li ng-class="{active: $state.includes('member')}">
+        <a ui-sref="member.list">
+          <i class="fa fa-street-view" aria-hidden="true"></i>
+          <span class="nav-label">vpn목록</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

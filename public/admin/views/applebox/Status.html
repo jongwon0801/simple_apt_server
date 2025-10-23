@@ -1,0 +1,95 @@
+
+  <div ng-controller="AppleboxStatusCtrl">
+    <!-- 페이지 헤더 -->
+    <div class="row wrapper border-bottom white-bg page-heading">
+      <div class="col-lg-10">
+        <h2>보관함 등록</h2>
+        <ol class="breadcrumb">
+          <li><a ui-sref="home">보관함</a></li>
+          <li><a ui-sref="applebox.list">설치 목록</a></li>
+          <li class="active"><strong>보관함 조회</strong></li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- 컨텐츠 -->
+    <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="ibox">
+            <div class="ibox-title">
+              <h5>락커 목록</h5>
+              <div class="ibox-tools">
+                <!-- 필요 시 버튼 추가 -->
+              </div>
+            </div>
+
+            <div class="ibox-content">
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>yid</th>
+                      <th>col</th>
+                      <th>row</th>
+                      <th>jumper</th>
+                      <th>serial</th>
+                      <th>상태</th>
+                      <th>보내는 사람</th>
+                      <th>보관일</th>
+                      <th>받는 사람</th>
+                      <th>인증번호</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="locker in list">
+                      <td>{{ locker.yid }}</td>
+                      <td>{{ locker.col }}</td>
+                      <td>{{ locker.row }}</td>
+                      <td>{{ locker.jumper || '-' }}</td>
+                      <td>{{ locker.serial || '-' }}</td>
+                      <td>
+                        {{ (lockerStatus | filter:{codeKey:
+                        locker.status})[0].codeValue || locker.status }}
+                      </td>
+                      <td>{{ locker.senderHp || '-' }}</td>
+                      <td>{{ locker.regDate | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+                      <td>{{ locker.receiverHp || '-' }}</td>
+                      <td>{{ locker.authNum || '-' }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- 페이지네이션 -->
+              <ul class="pagination">
+                <li ng-class="{disabled: currentPage === 1}">
+                  <a href="" ng-click="pageChanged(currentPage - 1)">«</a>
+                </li>
+                <li
+                  ng-repeat="page in [].constructor(Math.ceil(totalItems/display)) track by $index"
+                  ng-class="{active: currentPage === ($index + 1)}"
+                >
+                  <a href="" ng-click="pageChanged($index + 1)"
+                    >{{$index + 1}}</a
+                  >
+                </li>
+                <li
+                  ng-class="{disabled: currentPage === Math.ceil(totalItems/display)}"
+                >
+                  <a href="" ng-click="pageChanged(currentPage + 1)">»</a>
+                </li>
+              </ul>
+            </div>
+            <!-- ibox-content -->
+          </div>
+          <!-- ibox -->
+        </div>
+        <!-- col-lg-12 -->
+      </div>
+      <!-- row -->
+    </div>
+    <!-- wrapper-content -->
+  </div>
+  <!-- ng-controller -->
+

@@ -1,0 +1,93 @@
+<div ng-controller="SaveLogCtrl">
+  <!-- 상단 헤더 -->
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+      <h2>보관 로그</h2>
+      <ol class="breadcrumb">
+        <li><a ui-sref="home">보관함</a></li>
+        <li class="active"><strong>보관 로그</strong></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- 본문 -->
+  <div class="wrapper wrapper-content animated fadeInRight" style="background-color: #fff; padding: 15px">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h5>보관 로그 검색</h5>
+      </div>
+
+      <!-- 🔍 검색 영역 -->
+      <form class="form-inline" ng-submit="formSubmit()">
+        <!-- 날짜 범위 선택 -->
+        <div class="form-group">
+          <label for="daterange">기간:</label>
+          <div id="daterange" class="form-control input-sm" style="cursor: pointer">
+            <span></span> <i class="fa fa-calendar"></i>
+          </div>
+        </div>
+
+        <!-- 검색어 -->
+        <div class="form-group" style="margin-left: 10px">
+          <label for="searchText">검색어:</label>
+          <input type="text" class="form-control input-sm" id="searchText" ng-model="sform.searchText"
+            placeholder="보관자 또는 수취인 휴대폰" />
+        </div>
+
+        <button type="submit" class="btn btn-sm btn-primary" style="margin-left: 10px">
+          <i class="fa fa-search"></i> 검색
+        </button>
+      </form>
+    </div>
+
+    <hr />
+
+    <!-- 📋 로그 리스트 테이블 -->
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th class="text-center">번호</th>
+            <th class="text-center">사물함</th>
+            <th class="text-center">보관자</th>
+            <th class="text-center">수취인</th>
+            <th class="text-center">행/열</th>
+            <th class="text-center">점퍼</th>
+            <th class="text-center">시리얼</th>
+            <th class="text-center">날짜</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in list">
+            <td class="text-center">
+              {{ ($index + 1) + (currentPage - 1) * display }}
+            </td>
+            <td class="text-center">
+              {{ item.lockerLabel }} (ID: {{ item.yid }})
+            </td>
+            <td class="text-center">{{ item.senderHp }}</td>
+            <td class="text-center">{{ item.receiverHp }}</td>
+            <td class="text-center">{{ item.row }} / {{ item.col }}</td>
+            <td class="text-center">{{ item.jumper }}</td>
+            <td class="text-center">{{ item.serial }}</td>
+            <td class="text-center">{{ toLocalDateString(item.regDate) }}</td>
+          </tr>
+          <tr ng-if="!list.length">
+            <td colspan="8" class="text-center text-muted">
+              데이터가 없습니다.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 페이지네이션 -->
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <pagination ng-change="pageChanged(currentPage)" total-items="totalItems" ng-model="currentPage" next-text="다음"
+          previous-text="이전" first-text="처음" last-text="마지막" max-size="maxSize" items-per-page="display"
+          class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages">
+        </pagination>
+      </div>
+    </div>
+  </div>

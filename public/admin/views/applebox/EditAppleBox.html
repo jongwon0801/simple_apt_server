@@ -1,0 +1,80 @@
+<div ng-controller="AppleboxEditCtrl">
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+      <h2>보관함 {{ isEdit ? '수정' : '등록' }}</h2>
+      <ol class="breadcrumb">
+        <li><a ui-sref="home">보관함</a></li>
+        <li><a ui-sref="applebox.list">설치목록</a></li>
+        <li class="active"><strong>보관함 {{ isEdit ? '수정' : '등록' }}</strong></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h5>보관함 {{ isEdit ? '수정' : '등록' }}</h5>
+      </div>
+      <div class="ibox-content">
+        <form class="form-horizontal" ng-submit="formSubmit()">
+
+          <!-- 보관함 ID -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">YID 입력</label>
+            <div class="col-sm-4">
+              <input type="number" ng-model="item.yid" class="form-control" placeholder="보관함 식별번호 입력"
+                ng-readonly="isEdit" required />
+            </div>
+          </div>
+
+          <!-- 위치명 / 주소 -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">위치명</label>
+            <div class="col-sm-4">
+              <input type="text" ng-model="item.location" class="form-control" placeholder="설치 위치" required />
+            </div>
+
+            <label class="col-sm-2 control-label">주소</label>
+            <div class="col-sm-4">
+              <input type="text" ng-model="item.addr" class="form-control" placeholder="주소" required />
+            </div>
+          </div>
+
+          <!-- IP / 연락처 -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">IP</label>
+            <div class="col-sm-4">
+              <input type="text" ng-model="item.ip" class="form-control" placeholder="IP 주소" />
+            </div>
+
+            <label class="col-sm-2 control-label">연락처</label>
+            <div class="col-sm-4">
+              <input type="text" ng-model="item.hp" class="form-control" placeholder="담당자 연락처" />
+            </div>
+          </div>
+
+          <!-- 보드 개수 / 설치일 -->
+          <div class="form-group">
+            <label class="col-sm-2 control-label">보드 개수</label>
+            <div class="col-sm-4">
+              <input type="number" ng-model="item.boardCnt" class="form-control" min="0" />
+            </div>
+
+            <label class="col-sm-2 control-label">설치일</label>
+            <div class="col-sm-4">
+              <input type="date" ng-model="item.installDate" class="form-control" />
+            </div>
+          </div>
+
+          <!-- 제출 버튼 -->
+          <div class="form-group">
+            <div class="col-sm-12 text-center">
+              <button type="submit" class="btn btn-primary">{{ isEdit ? '수정' : '등록' }}</button>
+              <a ui-sref="applebox.list" class="btn btn-default">취소</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

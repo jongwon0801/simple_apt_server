@@ -1,0 +1,23 @@
+{
+  "applebox": {
+    "yid": 11000,
+    "name": "테스트센터",
+    "addr": "서울특별시 테스트구 1길",
+    "ip": "192.168.0.69",
+    "hp": "01051925220",
+    "installDate": "2025-10-22"
+  },
+  "cabinet": [
+    
+    {
+      "label": "B",
+      "box": [
+        {"label": "5", "col": 1, "row": 0, "jumper": 1, "serial": 5, "width": 500, "height": 225, "status": "B"},
+        {"label": "6", "col": 1, "row": 1, "jumper": 1, "serial": 6, "width": 500, "height": 225, "status": "B"},
+        {"label": "7", "col": 1, "row": 2, "jumper": 1, "serial": 7, "width": 500, "height": 225, "status": "B"},
+        {"label": "8", "col": 1, "row": 3, "jumper": 1, "serial": 8, "width": 500, "height": 225, "status": "B"},
+        {"label": "9", "col": 1, "row": 4, "jumper": 1, "serial": 9, "width": 500, "height": 225, "status": "B"}
+      ]
+    }
+  ]
+}
