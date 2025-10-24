@@ -1,0 +1,97 @@
+<div ng-controller="AppleboxStatusCtrl">
+  <!-- 페이지 헤더 -->
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+      <h2>보관함 조회</h2>
+      <ol class="breadcrumb">
+        <li>보관함</li>
+        <li><a ui-sref="applebox.list">설치 목록</a></li>
+        <li class="active"><strong>락커 상태 조회</strong></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- 컨텐츠 -->
+  <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>락커 목록</h5>
+            <div class="ibox-tools">
+              <!-- 필요 시 버튼 추가 -->
+            </div>
+          </div>
+
+          <div class="ibox-content">
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>yid</th>
+                    <th>label</th>
+                    <th>col</th>
+                    <th>row</th>
+                    <th>jumper</th>
+                    <th>serial</th>
+                    <th>width</th>
+                    <th>height</th>
+                    <th>상태</th>
+                    <th>보내는 사람</th>
+                    <th>받는 사람</th>
+                    <th>인증번호</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="locker in list">
+                    <td>{{ locker.yid }}</td>
+                    <td>{{ locker.label || '-' }}</td>
+                    <td>{{ locker.col }}</td>
+                    <td>{{ locker.row }}</td>
+                    <td>{{ locker.jumper || '-' }}</td>
+                    <td>{{ locker.serial || '-' }}</td>
+                    <td>{{ locker.width || '-' }}</td>
+                    <td>{{ locker.height || '-' }}</td>
+                    <td>{{ locker.statusLabel || locker.status }}</td>
+                    <td>{{ locker.senderHp || '-' }}</td>
+                    <td>{{ locker.receiverHp || '-' }}</td>
+                    <td>{{ locker.authNum || '-' }}</td>
+                  </tr>
+                  <tr ng-if="!list || list.length === 0">
+                    <td colspan="12" class="text-center">
+                      조회된 데이터가 없습니다.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- 페이지네이션 (uib-pagination 사용) -->
+            <div class="text-center" ng-if="totalItems > display">
+              <uib-pagination
+                total-items="totalItems"
+                items-per-page="display"
+                max-size="maxSize"
+                ng-model="currentPage"
+                ng-change="pageChanged(currentPage)"
+                class="pagination-sm"
+                boundary-links="true"
+                rotate="false"
+                previous-text="이전"
+                next-text="다음"
+                first-text="처음"
+                last-text="마지막"
+              ></uib-pagination>
+            </div>
+          </div>
+          <!-- ibox-content -->
+        </div>
+        <!-- ibox -->
+      </div>
+      <!-- col-lg-12 -->
+    </div>
+    <!-- row -->
+  </div>
+  <!-- wrapper-content -->
+</div>
+<!-- ng-controller -->

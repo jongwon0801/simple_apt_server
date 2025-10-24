@@ -1,0 +1,28 @@
+
+{
+  "yid": 1,
+  "cabinet": [
+    {
+      "label": "A",
+      "width": 500,
+      "box": [
+        {"label":"1","col":0,"row":0,"jumper":1,"serial":1,"status":"B","width":500,"height":225},
+        {"label":"2","col":0,"row":1,"jumper":1,"serial":2,"status":"B","width":500,"height":225},
+        {"label":"KO","col":0,"row":2,"jumper":0,"serial":null,"status":"C","width":500,"height":225},
+        {"label":"3","col":0,"row":3,"jumper":1,"serial":3,"status":"B","width":500,"height":225},
+        {"label":"4","col":0,"row":4,"jumper":1,"serial":4,"status":"B","width":500,"height":225}
+      ]
+    },
+    {
+      "label": "B",
+      "width": 500,
+      "box": [
+        {"label":"5","col":1,"row":0,"jumper":1,"serial":5,"status":"B","width":500,"height":225},
+        {"label":"6","col":1,"row":1,"jumper":1,"serial":6,"status":"B","width":500,"height":225},
+        {"label":"7","col":1,"row":2,"jumper":1,"serial":7,"status":"B","width":500,"height":225},
+        {"label":"8","col":1,"row":3,"jumper":1,"serial":8,"status":"B","width":500,"height":225},
+        {"label":"9","col":1,"row":4,"jumper":1,"serial":9,"status":"B","width":500,"height":225}
+      ]
+    }
+  ]
+}

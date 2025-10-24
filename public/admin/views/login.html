@@ -1,0 +1,65 @@
+<div class="middle-box text-center loginscreen animated fadeInDown">
+  <div>
+    <div>
+      <h1 class="logo-name" style="font-size: 80px">위키박스</h1>
+    </div>
+    <h3>Welcome to wikibox</h3>
+    <p ng-if="false">
+      Perfectly designed and precisely prepared admin theme with over 50 pages
+      with extra new web app views.
+    </p>
+    <p ng-if="false">Login in. To see it in action.</p>
+    <form
+      class="m-t"
+      role="form"
+      method="post"
+      name="myForm"
+      ng-submit="tryLogin()"
+    >
+      <div class="form-group">
+        <input
+          type="text"
+          name="userId"
+          id="userId"
+          class="form-control"
+          placeholder="유저아이디"
+          ng-model="userId"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          name="password"
+          id="password"
+          class="form-control"
+          placeholder="패스워드"
+          ng-model="password"
+          autocomplete="off"
+          required
+        />
+      </div>
+
+      <button
+        type="submit"
+        ng-disabled="form.$invalid || dataLoading"
+        class="btn btn-primary block full-width m-b"
+      >
+        Login
+      </button>
+              <img
+        ng-if="dataLoading"
+        src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+      />
+          
+    </form>
+    <p ng-if="false" class="m-t">
+      <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small>
+    </p>
+  </div>
+  <div style="color: white">
+    <strong>Copyright</strong> 위키박스 &copy; 2020-2024 (주)위키박스<br />
+    주소: 남양주 다산순환로 20, 302호 Tel 1577-4594 <br />
+    © 2025 wikibox all rights reserved.
+  </div>
+</div>

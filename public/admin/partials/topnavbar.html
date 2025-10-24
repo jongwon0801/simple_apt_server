@@ -1,0 +1,45 @@
+<!-- ============================= -->
+<!--  상단 네비게이션 (Top Navbar) -->
+<!-- ============================= -->
+<div class="row border-bottom">
+  <nav
+    class="navbar navbar-static-top white-bg"
+    role="navigation"
+    style="margin-bottom: 0"
+  >
+    <div class="navbar-header">
+      <!-- 접힘 버튼은 유지해도 동작 안함 (디자인용) -->
+      <span minimaliza-sidebar></span>
+
+      <form role="search" class="navbar-form-custom" method="post" action="">
+        <div class="form-group">
+          <input
+            type="text"
+            placeholder="애플박스"
+            class="form-control"
+            name="top-search"
+            id="top-search"
+            readonly
+          />
+        </div>
+      </form>
+    </div>
+
+    <ul class="nav navbar-top-links navbar-right">
+      <li>
+        <div style="display: flex; align-items: center">
+          <span ng-if="main.currentUser" style="margin-right: 10px"
+            >👤 {{ main.currentUser.uid }}</span
+          >
+          <button
+            ng-if="main.currentUser"
+            class="btn btn-danger btn-sm"
+            ng-click="main.logout()"
+          >
+            로그아웃
+          </button>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</div>

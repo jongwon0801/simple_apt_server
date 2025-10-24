@@ -1,0 +1,145 @@
+<form role="form" id="myForm" ng-submit="trySave()">
+  <div class="modal-header">
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-hidden="true"
+      ng-click="close()"
+    >
+      &times;
+    </button>
+    <h4 class="modal-title">락커</h4>
+  </div>
+
+  <div class="modal-body">
+    <!-- 락커 기본정보 (읽기전용) -->
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        ng-model="item.label"
+        placeholder="라벨"
+        readonly
+      />
+    </div>
+    <div class="form-group">
+      <input
+        type="number"
+        class="form-control"
+        ng-model="item.col"
+        placeholder="열"
+        readonly
+      />
+    </div>
+    <div class="form-group">
+      <input
+        type="number"
+        class="form-control"
+        ng-model="item.row"
+        placeholder="행"
+        readonly
+      />
+    </div>
+    <div class="form-group">
+      <input
+        type="number"
+        class="form-control"
+        ng-model="item.jumper"
+        placeholder="점퍼"
+        readonly
+      />
+    </div>
+    <div class="form-group">
+      <input
+        type="number"
+        class="form-control"
+        ng-model="item.serial"
+        placeholder="시리얼"
+        readonly
+      />
+    </div>
+
+    <!-- 발송인 정보 -->
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        ng-model="item.saveHp"
+        placeholder="발송인핸드폰"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        ng-model="item.saveName"
+        placeholder="발송인이름"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        ng-model="item.saveDate"
+        placeholder="발송 시간"
+        readonly
+      />
+    </div>
+
+    <!-- 패스워드 (읽기전용) -->
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        ng-model="item.pwd"
+        placeholder="패스워드"
+        readonly
+      />
+    </div>
+
+    <!-- 수령인 정보 -->
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        ng-model="item.toHp"
+        placeholder="수령인핸드폰"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        ng-model="item.toName"
+        placeholder="수령인명"
+        required
+      />
+    </div>
+
+    <!-- 상태 선택 -->
+    <div class="form-group">
+      <select
+        class="form-control"
+        ng-options="code.key as code.name for code in myCache.cache.get('locker.usage')"
+        ng-model="item.usage"
+        required
+      ></select>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" ng-click="close()">
+      취소
+    </button>
+    <button type="submit" class="btn btn-success" ng-if="action=='save'">
+      저장하려 열기
+    </button>
+    <button type="submit" class="btn btn-success" ng-if="action=='take'">
+      찾으려 열기
+    </button>
+  </div>
+</form>

@@ -1,0 +1,51 @@
+<div ng-controller="AppleboxSettingCtrl">
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+      <h2>락커 시각화</h2>
+      <ol class="breadcrumb">
+        <li>보관함</li>
+        <li class="active"><strong>락커 시각화</strong></li>
+      </ol>
+    </div>
+    <div class="col-lg-2"></div>
+  </div>
+
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox">
+      <div class="ibox-title">
+        <h5>락커 상태</h5>
+      </div>
+      <div
+        class="ibox-content"
+        style="
+          position: relative;
+          height: 600px;
+          border: 1px solid #ccc;
+          overflow: hidden;
+        "
+      >
+        <div
+          ng-repeat="locker in lockers"
+          ng-if="locker.loc"
+          ng-style="{
+               position: 'absolute',
+               left: locker.loc.left + 'px',
+               top: locker.loc.top + 'px',
+               width: locker.loc.getWidth() + 'px',
+               height: locker.loc.getHeight() + 'px',
+               backgroundColor: locker.color,
+               border: '1px solid #000',
+               textAlign: 'center',
+               fontSize: '12px',
+               lineHeight: locker.loc.getHeight() + 'px',
+               cursor: 'pointer'
+             }"
+          title="Label: {{locker.box.label}} | Status: {{locker.box.status}}"
+          ng-click="editLockerByVisual(locker.box)"
+        >
+          {{locker.box.label}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
