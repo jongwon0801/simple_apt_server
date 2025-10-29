@@ -1,0 +1,32 @@
+
+[
+  { "yid": 10014, "label": "A1", "col": 1, "row": 1, "jumper": 1, "serial": 1, "width": 200, "height": 200, "status": "B" },
+  
+  { "yid": 10014, "label": "A2-1", "col": 1, "row": 2, "jumper": 1, "serial": 2, "width": 60, "height": 95, "status": "C" }, 
+  { "yid": 10014, "label": "A2-2", "col": 1, "row": 2, "jumper": 1, "serial": 3, "width": 60, "height": 95, "status": "B" }, 
+  { "yid": 10014, "label": "A2-3", "col": 1, "row": 2, "jumper": 1, "serial": 4, "width": 60, "height": 95, "status": "B" }, 
+  
+  { "yid": 10014, "label": "A3", "col": 1, "row": 3, "jumper": 1, "serial": 8, "width": 200, "height": 200, "status": "B" },
+
+  { "yid": 10014, "label": "B1", "col": 2, "row": 1, "jumper": 2, "serial": 9, "width": 200, "height": 200, "status": "B" },
+  { "yid": 10014, "label": "B2", "col": 2, "row": 2, "jumper": 2, "serial": 10, "width": 200, "height": 200, "status": "B" },
+  { "yid": 10014, "label": "B3", "col": 2, "row": 3, "jumper": 8, "serial": 11, "width": 200, "height": 200, "status": "B" },
+  
+  { "yid": 10014, "label": "C1", "col": 3, "row": 1, "jumper": 2, "serial": 12, "width": 200, "height": 200, "status": "C" },
+  { "yid": 10014, "label": "C2", "col": 3, "row": 2, "jumper": 2, "serial": 13, "width": 200, "height": 200, "status": "B" },
+  { "yid": 10014, "label": "C3", "col": 3, "row": 3, "jumper": 2, "serial": 14, "width": 200, "height": 200, "status": "A" }
+]
+
+[
+  { "yid": 10013, "label": "A1", "col": 1, "row": 1, "jumper": 1, "serial": 1, "width": 200, "height": 200, "status": "B" },
+  { "yid": 10013, "label": "A2", "col": 1, "row": 2, "jumper": 1, "serial": 2, "width": 200, "height": 200, "status": "C" }, 
+  { "yid": 10013, "label": "A3", "col": 1, "row": 3, "jumper": 1, "serial": 3, "width": 200, "height": 200, "status": "B" },
+
+  { "yid": 10013, "label": "B1", "col": 2, "row": 1, "jumper": 2, "serial": 4, "width": 200, "height": 200, "status": "B" },
+  { "yid": 10013, "label": "B2", "col": 2, "row": 2, "jumper": 2, "serial": 5, "width": 200, "height": 200, "status": "B" },
+  { "yid": 10013, "label": "B3", "col": 2, "row": 3, "jumper": 8, "serial": 6, "width": 200, "height": 200, "status": "B" },
+  
+  { "yid": 10013, "label": "C1", "col": 3, "row": 1, "jumper": 2, "serial": 7, "width": 200, "height": 200, "status": "B" },
+  { "yid": 10013, "label": "C2", "col": 3, "row": 2, "jumper": 2, "serial": 8, "width": 200, "height": 200, "status": "B" },
+  { "yid": 10013, "label": "C3", "col": 3, "row": 3, "jumper": 2, "serial": 9, "width": 200, "height": 200, "status": "B" }
+]

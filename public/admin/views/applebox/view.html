@@ -1,0 +1,135 @@
+<!-- 헤더 -->
+<div class="row wrapper border-bottom white-bg page-heading mb-3">
+  <div class="col-lg-10">
+    <h2>락커 설정</h2>
+    <ol class="breadcrumb">
+      <li>보관함</li>
+      <li><a ui-sref="applebox.list">설치목록</a></li>
+      <li class="active"><strong>락커 설정</strong></li>
+    </ol>
+  </div>
+</div>
+
+<!-- 본문 -->
+<div class="wrapper wrapper-content">
+  <div class="ibox">
+    <div class="ibox-title">
+      <h3 class="m-0">락커 목록</h3>
+    </div>
+
+    <div class="ibox-content">
+      <!-- 락커 컨테이너 -->
+      <div
+        class="locker-grid"
+        ng-style="{ width: containerWidth + 'px', height: containerHeight + 'px' }"
+      >
+        <!-- 락커 카드 -->
+        <div
+          ng-repeat="locker in lockers"
+          ng-class="[
+            'locker-card',
+            locker.status === 'B'
+              ? 'empty'
+              : locker.status === 'C'
+              ? 'disabled'
+              : 'occupied'
+          ]"
+          ng-style="{
+            width: (locker.width || lockerWidth) + 'px',
+            height: (locker.height || lockerHeight) + 'px',
+            left: locker.loc.left + 'px',
+            top: locker.loc.top + 'px'
+          }"
+          ng-click="openLocker(locker)"
+        >
+          <div class="locker-label">{{ locker.label }}</div>
+          <div class="locker-status">
+            {{ locker.status === 'B' ? '비어있음' : (locker.status === 'C' ?
+            '사용불가' : '사용중') }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 스타일 -->
+<style>
+  .locker-grid {
+    position: relative;
+    background: #f9fafb;
+    border-radius: 12px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.05);
+    padding: 15px;
+  }
+
+  .locker-card {
+    position: absolute;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .locker-card.empty {
+    background: linear-gradient(135deg, #8ecae6, #219ebc); /* 파랑 */
+  }
+
+  .locker-card.occupied {
+    background: linear-gradient(135deg, #f78da7, #c9184a); /* 빨강 */
+  }
+
+  .locker-card.disabled {
+    background: linear-gradient(135deg, #ffd166, #f4a261); /* 노랑 */
+  }
+
+  .locker-card:hover {
+    transform: scale(1.07);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .locker-label {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  .locker-status {
+    font-size: 12px;
+    opacity: 0.8;
+  }
+
+  .ibox-title h3 {
+    font-weight: 600;
+  }
+
+  .my-modal-center .modal-dialog {
+    display: flex;
+    align-items: center; /* 수직 중앙 */
+    justify-content: center; /* 수평 중앙 */
+    min-height: 100vh; /* 화면 전체 높이 기준 중앙 */
+  }
+
+  .my-modal-center .modal-content {
+    width: 100%; /* 필요에 따라 조절 */
+    border-radius: 12px; /* 모서리 부드럽게 */
+    padding: 10px; /* 안쪽 여백 */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* 살짝 그림자 추가 */
+  }
+
+  .my-modal-center .modal-header {
+    border-bottom: none; /* 선 제거로 부드럽게 */
+    padding-bottom: 8px;
+  }
+
+  .my-modal-center .modal-footer {
+    border-top: none; /* 선 제거 */
+    padding-top: 8px;
+    justify-content: flex-end;
+  }
+</style>

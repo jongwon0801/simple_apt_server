@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html ng-app="inspinia">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title page-title>위키박스 관리자</title>
+
+    <!-- Font Awesome -->
+    <link
+      href="/bower_components/font-awesome/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap -->
+    <link
+      href="/bower_components/bootstrap/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Inspinia CSS -->
+    <link href="/css/animate.css" rel="stylesheet" />
+    <link id="loadBefore" href="/css/style.css" rel="stylesheet" />
+    <link href="/bower_components/toastr/toastr.min.css" rel="stylesheet" />
+
+    <!-- 고정 레이아웃용 CSS -->
+    <style>
+      /* 상단 네비게이션 (Top Navbar) */
+      .navbar-static-top {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        z-index: 1100;
+        background: #fff;
+        border-bottom: 1px solid #e7eaec;
+      }
+
+      /* 왼쪽 사이드바 (Sidebar) */
+      .navbar-static-side {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 220px;
+        height: calc(100% - 60px);
+        overflow-y: auto;
+        background: #2f4050;
+        z-index: 1000;
+      }
+
+      /* 메인 콘텐츠 (Page Wrapper) */
+      #page-wrapper {
+        margin-left: 220px;
+        padding-top: 60px;
+        min-height: 100vh;
+        background: #f3f3f4;
+      }
+
+      /* 로그인 페이지: 헤더 없는 화면 */
+      body.no-header #page-wrapper {
+        margin-left: 0;
+        padding-top: 0;
+        background-color: #2f4050;
+        /* 로그인 화면 배경색 */
+      }
+
+      /* wrapper-content 기본 스타일 */
+      .wrapper-content {
+        min-height: 100vh;
+        padding: 15px;
+      }
+
+      /* 로그인 페이지: wrapper-content 배경 상속 */
+      body.no-header .wrapper-content {
+        background-color: inherit;
+      }
+
+      /* 메인 페이지: wrapper-content 흰색 */
+      body.has-sidebar .wrapper-content {
+        background-color: #fff;
+      }
+    </style>
+  </head>
+
+  <body
+    ng-controller="MainCtrl as main"
+    ng-class="{'no-header': !main.showHeader()}"
+  >
+    <!-- Top Navbar -->
+    <div
+      ng-if="main.showHeader()"
+      ng-include="'/admin/partials/topnavbar.html'"
+    ></div>
+
+    <!-- Left Sidebar -->
+    <div
+      ng-if="main.showHeader()"
+      ng-include="'/admin/partials/navigation.html'"
+    ></div>
+
+    <!-- Main Content -->
+    <div id="page-wrapper" ui-view></div>
+
+    <!-- Footer -->
+    <div
+      ng-if="main.showHeader()"
+      ng-include="'/admin/partials/footer.html'"
+    ></div>
+
+    <!-- jQuery & Bootstrap -->
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- MetisMenu & SlimScroll -->
+    <script src="/bower_components/metisMenu/dist/metisMenu.js"></script>
+    <script src="/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Inspinia Custom JS -->
+    <script src="/js/inspinia.js"></script>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script>
+      window.Chart = Chart; // 글로벌 노출
+    </script>
+
+    <!-- AngularJS Core -->
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-i18n/angular-locale_ko-kr.js"></script>
+    <script src="/bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script src="/bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+
+    <!-- AngularJS Plugins -->
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+    <!-- 기타 라이브러리 -->
+    <script src="/bower_components/wowjs/dist/wow.min.js"></script>
+    <script src="/bower_components/toastr/toastr.min.js"></script>
+
+    <!-- AngularJS 앱 정의 -->
+    <script src="/admin/js/AuthServices.js"></script>
+
+    <script src="/admin/js/adminApp.js"></script>
+    <script src="/admin/views/login.js"></script>
+    <script src="/admin/js/config.js"></script>
+    <script src="/admin/js/controllers.js"></script>
+    <script src="/admin/js/index.js"></script>
+    <script src="/js/directives.js"></script>
+    <script src="/js/common.js"></script>
+  </body>
+</html>

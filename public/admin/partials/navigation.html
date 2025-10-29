@@ -1,0 +1,97 @@
+<!-- ============================= -->
+<!--  왼쪽 사이드 네비게이션 (Sidebar) -->
+<!-- ============================= -->
+<nav class="navbar-default navbar-static-side" role="navigation">
+  <div class="sidebar-collapse">
+    <ul side-navigation class="nav metismenu" id="side-menu">
+      <li class="nav-header">
+        <div class="profile-element">
+          <span class="clear">
+            <span class="block m-t-xs">
+              <strong class="font-bold">{{globals.currentUser.userId}}</strong>
+            </span>
+            <span class="text-muted text-xs block">관리자 메뉴</span>
+          </span>
+        </div>
+      </li>
+
+      <!-- 보관함 -->
+      <li ng-class="{active: $state.includes('applebox')}">
+        <a ui-sref="applebox.list">
+          <i class="fa fa-lock" aria-hidden="true"></i>
+          <span class="nav-label">보관함</span>
+          <span class="fa arrow"></span>
+        </a>
+        <ul
+          class="nav nav-second-level collapse"
+          ng-class="{in: $state.includes('applebox')}"
+        >
+          <li ui-sref-active="active">
+            <a ui-sref="applebox.dashboard">대쉬 보드</a>
+          </li>
+
+          <li ui-sref-active="active">
+            <a ui-sref="applebox.list">설치 목록</a>
+          </li>
+          <li ui-sref-active="active">
+            <a ui-sref="applebox.saveloglist">보관 로그</a>
+          </li>
+          <li ui-sref-active="active">
+            <a ui-sref="applebox.takeloglist">수령 로그</a>
+          </li>
+        </ul>
+      </li>
+
+      <!-- 택배기사 -->
+      <li ng-class="{active: $state.includes('deliveryStaff')}">
+        <a ui-sref="deliveryStaff.deliveryStaff_list">
+          <i class="fa fa-phone" aria-hidden="true"></i>
+          <span class="nav-label">택배기사</span>
+          <span class="fa arrow"></span>
+        </a>
+        <ul
+          class="nav nav-second-level collapse"
+          ng-class="{in: $state.includes('deliveryStaff')}"
+        >
+          <li ui-sref-active="active">
+            <a ui-sref="deliveryStaff.deliveryStaff_list">택배기사 리스트</a>
+          </li>
+        </ul>
+      </li>
+
+      <!-- 공지사항 -->
+      <li ng-class="{active: $state.includes('notice')}">
+        <a ui-sref="notice.notice_list">
+          <i class="fa fa-comments" aria-hidden="true"></i>
+          <span class="nav-label">공지사항</span>
+          <span class="fa arrow"></span>
+        </a>
+        <ul
+          class="nav nav-second-level collapse"
+          ng-class="{in: $state.includes('notice')}"
+        >
+          <li ui-sref-active="active">
+            <a ui-sref="notice.notice_list">공지 리스트</a>
+          </li>
+        </ul>
+      </li>
+
+      <!-- VPN 목록 -->
+      <li ng-class="{active: $state.includes('vpn')}">
+        <a ui-sref="vpn.vpn_list">
+          <i class="fa fa-street-view" aria-hidden="true"></i>
+          <span class="nav-label">VPN</span>
+          <span class="fa arrow"></span>
+        </a>
+        <ul
+          class="nav nav-second-level collapse"
+          ng-class="{in: $state.includes('vpn')}"
+        >
+          <li ui-sref-active="active">
+            <a ui-sref="vpn.vpn_list">VPN 리스트</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>

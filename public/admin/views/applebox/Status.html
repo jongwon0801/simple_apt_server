@@ -1,0 +1,141 @@
+<!-- 페이지 헤더 -->
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>락커 상태</h2>
+    <ol class="breadcrumb">
+      <li>보관함</li>
+      <li><a ui-sref="applebox.list">설치 목록</a></li>
+      <li class="active"><strong>락커 상태</strong></li>
+    </ol>
+  </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="ibox">
+    <div class="ibox-content">
+      <!-- 검색 폼 -->
+      <form
+        class="form-inline m-b-sm"
+        ng-submit="filterList()"
+        style="
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
+      >
+        <div>
+          <input
+            type="text"
+            ng-model="keyword"
+            placeholder="라벨, 휴대폰 검색"
+            class="form-control"
+          />
+          <button type="submit" class="btn btn-primary">검색</button>
+        </div>
+      </form>
+
+      <!-- 락커 테이블 -->
+      <div class="table-responsive" ng-if="pagedList.length">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>라벨</th>
+              <th>열</th>
+              <th>행</th>
+              <th>점퍼</th>
+              <th>시리얼 번호</th>
+              <th>상태</th>
+              <th>보낸 사람</th>
+              <th>받는 사람</th>
+              <th>인증번호</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="locker in pagedList">
+              <td>{{ locker.label }}</td>
+              <td>{{ locker.col }}</td>
+              <td>{{ locker.row }}</td>
+              <td>{{ locker.jumper || '-' }}</td>
+              <td>{{ locker.serial || '-' }}</td>
+              <td>{{ locker.status }}</td>
+              <td>{{ locker.senderHp || '-' }}</td>
+              <td>{{ locker.receiverHp || '-' }}</td>
+              <td>{{ locker.authNum || '-' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 조회 결과 없을 때 -->
+      <div ng-if="!pagedList.length" class="alert alert-info">
+        조회된 락커가 없습니다.
+      </div>
+
+      <!-- 페이지네이션 -->
+      <div class="pagination">
+        <button
+          type="button"
+          class="btn btn-sm btn-default"
+          ng-click="goPage(currentPage-1)"
+          ng-disabled="currentPage === 1"
+        >
+          이전
+        </button>
+        <span>{{currentPage}} / {{totalPages}}</span>
+        <button
+          type="button"
+          class="btn btn-sm btn-default"
+          ng-click="goPage(currentPage+1)"
+          ng-disabled="currentPage === totalPages"
+        >
+          다음
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .wrapper-content {
+    min-height: 100vh;
+    background-color: #fff;
+    padding: 15px;
+  }
+  .wrapper-content .row,
+  .wrapper-content .col-lg-12,
+  .wrapper-content .ibox {
+    background-color: inherit;
+  }
+
+  .form-inline.m-b-sm input.form-control {
+    margin-right: 10px;
+  }
+
+  /* 페이지네이션 중앙 고정 */
+  .pagination {
+    position: fixed; /* 화면 기준 고정 */
+    bottom: 15px; /* 화면 하단에서 15px */
+    left: 50%; /* 화면 가로 중앙 */
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  /* 버튼 클릭 시 테두리 제거 */
+  .pagination .btn {
+    outline: none; /* 클릭/포커스 시 파란 테두리 제거 */
+    box-shadow: none; /* 부트스트랩 그림자 제거 */
+  }
+
+  .pagination .btn:focus {
+    outline: none;
+    box-shadow: none;
+  }
+</style>

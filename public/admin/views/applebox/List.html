@@ -1,0 +1,177 @@
+<!-- ============================= -->
+<!-- 1. 페이지 헤더 -->
+<!-- ============================= -->
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>설치 목록</h2>
+    <ol class="breadcrumb">
+      <li>보관함</li>
+      <li class="active"><strong>설치 목록</strong></li>
+    </ol>
+  </div>
+</div>
+
+<!-- ============================= -->
+<!-- 2. 본문 -->
+<!-- ============================= -->
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox">
+        <!-- ----------------------------- -->
+        <!-- 상단 버튼 -->
+        <!-- ----------------------------- -->
+        <div class="ibox-title">
+          <h5>설치 목록</h5>
+          <div class="ibox-tools">
+            <a
+              ui-sref="applebox.detail({ yid: null })"
+              class="btn btn-primary btn-sm"
+              >락커 등록</a
+            >
+            <a
+              ui-sref="applebox.edit({ yid: null })"
+              class="btn btn-primary btn-sm"
+              >보관함 등록</a
+            >
+          </div>
+        </div>
+
+        <!-- ----------------------------- -->
+        <!-- 검색 폼 -->
+        <!-- ----------------------------- -->
+        <div class="ibox-content">
+          <form
+            class="form-inline search-form"
+            ng-submit="$event.preventDefault(); applyFilter();"
+          >
+            <input
+              type="text"
+              ng-model="keyword"
+              ng-change="applyFilter()"
+              placeholder="YID or 위치 검색"
+              class="form-control"
+            />
+            <button type="submit" class="btn btn-primary">검색</button>
+          </form>
+        </div>
+
+        <!-- ----------------------------- -->
+        <!-- 설치 목록 테이블 -->
+        <!-- ----------------------------- -->
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>YID</th>
+                <th>위치</th>
+                <th>락커설정</th>
+                <th>락커현황</th>
+                <th>로그</th>
+                <th>영상</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in pagedList">
+                <td>
+                  <a ui-sref="applebox.status({yid:item.yid})">{{item.yid}}</a>
+                </td>
+                <td><a ui-sref="applebox.edit(item)">{{item.location}}</a></td>
+                <td><a ui-sref="applebox.setting(item)">설정</a></td>
+                <td><a ui-sref="applebox.view(item)">현황</a></td>
+                <td>
+                  <a ui-sref="applebox.saveloglist({yid:item.yid})">보관</a>,
+                  <a ui-sref="applebox.takeloglist({yid:item.yid})">수령</a>
+                </td>
+                <td>
+                  <input
+                    type="button"
+                    ng-click="camera(item)"
+                    value="관제"
+                    class="btn btn-sm btn-info"
+                  />
+                </td>
+              </tr>
+              <tr ng-if="pagedList.length === 0">
+                <td colspan="6" class="text-center">
+                  더 이상 데이터가 없습니다.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ----------------------------- -->
+        <!-- 페이지네이션 -->
+        <!-- ----------------------------- -->
+        <div class="pagination">
+          <button
+            type="button"
+            class="btn btn-sm btn-default"
+            ng-click="goPage(currentPage-1)"
+            ng-disabled="currentPage === 1"
+          >
+            이전
+          </button>
+          <span>{{currentPage}} / {{totalPages}}</span>
+          <button
+            type="button"
+            class="btn btn-sm btn-default"
+            ng-click="goPage(currentPage+1)"
+            ng-disabled="currentPage === totalPages"
+          >
+            다음
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================= -->
+<!-- 3. 스타일 -->
+<!-- ============================= -->
+<style>
+  .wrapper-content {
+    min-height: 100vh;
+    background-color: #fff;
+    padding: 15px;
+    padding-bottom: 80px; /* pagination 높이 + 여유 */
+    box-sizing: border-box; /* padding 포함 */
+  }
+
+  .wrapper-content .row,
+  .wrapper-content .col-lg-12 {
+    background-color: inherit;
+  }
+
+  .search-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  .pagination {
+    position: fixed; /* 화면 기준 고정 */
+    bottom: 15px; /* 화면 하단에서 15px */
+    left: 50%; /* 화면 가로 중앙 */
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .pagination .btn {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .pagination .btn:focus {
+    outline: none;
+    box-shadow: none;
+  }
+</style>

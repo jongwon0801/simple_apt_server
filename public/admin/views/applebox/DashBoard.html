@@ -1,0 +1,165 @@
+<div
+  ng-if="currentUser"
+  style="
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 18px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: #f6f7fb;
+    min-height: 100vh;
+  "
+>
+  <!-- ---------------- 왼쪽 상단: 보관/수령 비율 ---------------- -->
+  <div
+    class="card"
+    style="
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      padding: 14px;
+    "
+  >
+    <h5 style="text-align: left; font-weight: bold; color: #333">
+      전체 보관함 정보
+    </h5>
+    <div
+      style="
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        justify-content: space-between;
+      "
+    >
+      <!-- 서머리 카드 -->
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 10px">
+        <div
+          style="
+            text-align: center;
+            padding: 8px;
+            background: #f0f0f0;
+            border-radius: 6px;
+          "
+        >
+          <h6 style="margin: 0; font-weight: 800; color: #333">
+            사물함 단말기 수
+          </h6>
+          <p style="margin: 0; font-size: 1.4em; font-weight: 900; color: #222">
+            {{summary.boxCount}}
+          </p>
+        </div>
+        <div
+          style="
+            text-align: center;
+            padding: 8px;
+            background: #f0f0f0;
+            border-radius: 6px;
+          "
+        >
+          <h6 style="margin: 0; font-weight: 800; color: #333">
+            전체 사물함 수
+          </h6>
+          <p style="margin: 0; font-size: 1.4em; font-weight: 900; color: #222">
+            {{summary.lockerCount}}
+          </p>
+        </div>
+        <div
+          style="
+            text-align: center;
+            padding: 8px;
+            background: #f0f0f0;
+            border-radius: 6px;
+          "
+        >
+          <h6 style="margin: 0; font-weight: 800; color: #333">이번달 보관</h6>
+          <p style="margin: 0; font-size: 1.4em; font-weight: 900; color: #222">
+            {{summary.saveThisMonth}}
+          </p>
+        </div>
+        <div
+          style="
+            text-align: center;
+            padding: 8px;
+            background: #f0f0f0;
+            border-radius: 6px;
+          "
+        >
+          <h6 style="margin: 0; font-weight: 800; color: #333">이번달 수령</h6>
+          <p style="margin: 0; font-size: 1.4em; font-weight: 900; color: #222">
+            {{summary.takeThisMonth}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------- 오른쪽 상단: 택배기사별 이용 ---------------- -->
+  <div
+    class="card"
+    style="
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      padding: 14px;
+    "
+  >
+    <h5 style="text-align: left; font-weight: bold; color: #333">
+      택배기사별 이용 빈도 Top 5
+    </h5>
+    <canvas id="staffChart" height="180"></canvas>
+  </div>
+
+  <!-- ---------------- 왼쪽 하단: 단말기별 이용 ---------------- -->
+  <div
+    class="card"
+    style="
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      padding: 14px;
+    "
+  >
+    <h5 style="text-align: left; font-weight: bold; color: #333">
+      단말기별 이용 빈도 Top 5
+    </h5>
+    <canvas id="yidChart" height="180"></canvas>
+  </div>
+
+  <!-- ---------------- 오른쪽 하단: 여유 공간 ---------------- -->
+  <div
+    class="card"
+    style="
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      padding: 14px;
+      text-align: center;
+      color: #999;
+      font-size: 1em;
+    "
+  >
+    <h5 style="text-align: left; font-weight: bold; color: #333">
+      보관/수령 비율
+    </h5>
+
+    <div style="padding: 10px 0; display: flex; justify-content: center">
+      <div style="transform: scale(0.85); transform-origin: center">
+        <canvas id="ratioChart" width="400" height="400"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- 반응형 -->
+  <style>
+    @media (max-width: 900px) {
+      div[ng-if="currentUser"] {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+      canvas {
+        max-width: 100% !important;
+      }
+    }
+  </style>
+</div>

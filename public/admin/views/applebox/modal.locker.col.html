@@ -1,0 +1,36 @@
+<form role="form" id="myForm" ng-submit="trySave()">
+  <div class="modal-header">
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-hidden="true"
+      ng-click="close()"
+    >
+      &times;
+    </button>
+    <h4 class="modal-title">락커</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <select
+        class="form-control"
+        ng-options="code.key as code.name for code in myCache.cache.get('boxtype')"
+        ng-model="item.boxtype"
+        required
+      ></select>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-danger"
+      data-dismiss="modal"
+      ng-click="close()"
+    >
+      취소
+    </button>
+    <button type="submit" class="btn btn-success">확인</button>
+  </div>
+</form>

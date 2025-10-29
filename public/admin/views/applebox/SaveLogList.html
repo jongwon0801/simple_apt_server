@@ -1,0 +1,221 @@
+<!-- 상단 헤더 -->
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>보관 로그</h2>
+    <ol class="breadcrumb">
+      <li>보관함</li>
+      <li class="active"><strong>보관 로그</strong></li>
+    </ol>
+  </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="ibox">
+    <div class="ibox-title">
+      <h5>보관 로그 검색</h5>
+    </div>
+
+    <form class="form-inline" ng-submit="formSubmit()">
+      <div class="form-group">
+        <label>기간:</label>
+        <div
+          id="daterange"
+          class="form-control input-sm"
+          style="
+            cursor: pointer;
+            width: 220px;
+            display: inline-block;
+            margin-left: 5px;
+          "
+        >
+          <span></span> <i class="fa fa-calendar"></i>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-left: 10px">
+        <label>검색어:</label>
+        <input
+          type="text"
+          ng-model="sform.searchText"
+          class="form-control input-sm"
+          placeholder="보관자 또는 수취인"
+          style="width: 200px; margin-left: 5px"
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-sm btn-primary"
+        style="margin-left: 10px"
+      >
+        <i class="fa fa-search"></i> 검색
+      </button>
+    </form>
+
+    <hr />
+
+    <div class="table-responsive" ng-if="pagedList.length">
+      <table class="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th class="text-center">yid</th>
+            <th class="text-center">라벨</th>
+            <th class="text-center">보관자</th>
+            <th class="text-center">수취인</th>
+            <th class="text-center">행</th>
+            <th class="text-center">열</th>
+            <th class="text-center">점퍼</th>
+            <th class="text-center">시리얼</th>
+            <th class="text-center">보관일</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in pagedList">
+            <td class="text-center">{{ item.yid }}</td>
+            <td class="text-center">{{ item.lockerLabel }}</td>
+            <td class="text-center">{{ item.senderHp }}</td>
+            <td class="text-center">{{ item.receiverHp }}</td>
+            <td class="text-center">{{ item.row }}</td>
+            <td class="text-center">{{ item.col }}</td>
+            <td class="text-center">{{ item.jumper }}</td>
+            <td class="text-center">{{ item.serial }}</td>
+            <td class="text-center">{{ toLocalDateString(item.regDate) }}</td>
+          </tr>
+          <tr ng-if="!pagedList.length">
+            <td colspan="9" class="text-center text-muted">
+              데이터가 없습니다.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination">
+      <button
+        type="button"
+        class="btn btn-sm btn-default"
+        ng-click="goPage(currentPage-1)"
+        ng-disabled="currentPage === 1"
+      >
+        이전
+      </button>
+      <span>{{currentPage}} / {{totalPages}}</span>
+      <button
+        type="button"
+        class="btn btn-sm btn-default"
+        ng-click="goPage(currentPage+1)"
+        ng-disabled="currentPage === totalPages"
+      >
+        다음
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  angular
+    .module("inspinia", [])
+    .controller("SaveLogCtrl", function ($scope, $http, $timeout) {
+      $scope.display = 10;
+      $scope.currentPage = 1;
+      $scope.totalPages = 0;
+      $scope.list = [];
+      $scope.pagedList = [];
+      $scope.sform = { searchText: "", startDate: "", endDate: "" };
+
+      // 날짜 포맷 헬퍼
+      $scope.toLocalDateString = (s) =>
+        moment(new Date(s)).format("YYYY-MM-DD");
+
+      // 페이지 이동
+      $scope.goPage = function (p) {
+        if (p < 1) p = 1;
+        if (p > $scope.totalPages) p = $scope.totalPages;
+        $scope.currentPage = p;
+        $scope.updatePagedList();
+      };
+
+      $scope.updatePagedList = function () {
+        const start = ($scope.currentPage - 1) * $scope.display;
+        const end = start + $scope.display;
+        $scope.pagedList = $scope.list.slice(start, end);
+      };
+
+      // 검색
+      $scope.formSubmit = function () {
+        $scope.currentPage = 1;
+        $scope.doSearch();
+      };
+
+      $scope.doSearch = function () {
+        const params = {
+          searchText: $scope.sform.searchText,
+          startDate: $scope.sform.startDate,
+          endDate: $scope.sform.endDate,
+        };
+        $http
+          .get("/api/log/saveLog", { params })
+          .then((res) => {
+            $scope.list = res.data.data || [];
+            $scope.totalPages =
+              Math.ceil($scope.list.length / $scope.display) || 1;
+            $scope.updatePagedList();
+          })
+          .catch((err) => console.error(err));
+      };
+
+      $scope.cb = function (start, end) {
+        $scope.sform.startDate = start.format("YYYY-MM-DD");
+        $scope.sform.endDate = end.format("YYYY-MM-DD");
+        $("#daterange span").html(
+          $scope.sform.startDate + " ~ " + $scope.sform.endDate
+        );
+
+        // Angular digest 사이클 중이 아니면 $apply 호출
+        if (!$scope.$$phase) {
+          $scope.$apply();
+        }
+      };
+
+      $timeout(function () {
+        const start = moment().subtract(7, "days");
+        const end = moment();
+        $("#daterange").daterangepicker(
+          {
+            startDate: start,
+            endDate: end,
+            locale: {
+              format: "YYYY-MM-DD",
+              applyLabel: "확인",
+              cancelLabel: "취소",
+            },
+            ranges: {
+              오늘: [moment(), moment()],
+              "최근 7일": [moment().subtract(6, "days"), moment()],
+              이번달: [moment().startOf("month"), moment().endOf("month")],
+            },
+          },
+          $scope.cb
+        );
+        $scope.cb(start, end);
+        $scope.doSearch();
+      });
+    });
+</script>
+<!-- 스타일 -->
+<style>
+  .pagination {
+    position: fixed; /* 화면 기준 고정 */
+    bottom: 15px; /* 화면 하단에서 15px */
+    left: 50%; /* 화면 가로 중앙 */
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+</style>

@@ -1,0 +1,43 @@
+<div ng-controller="DeliveryStaffEditCtrl">
+  <!-- 페이지 헤더 -->
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+      <h2>{{ isEdit ? "택배기사 수정" : "택배기사 등록" }}</h2>
+      <ol class="breadcrumb">
+        <li>택배기사 관리</li>
+        <li><a ui-sref="deliveryStaff.list">택배기사 리스트</a></li>
+        <li class="active"><strong>{{ isEdit ? "수정" : "등록" }}</strong></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox">
+      <div class="ibox-content">
+        <form ng-submit="saveStaff()">
+          <div class="form-group">
+            <label>휴대폰 번호</label>
+            <input
+              type="text"
+              class="form-control"
+              ng-model="staff.hp"
+              placeholder="휴대폰 번호를 입력하세요"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">
+              {{ isEdit ? "수정 완료" : "등록" }}
+            </button>
+            <a
+              ui-sref="deliveryStaff.deliveryStaff_list"
+              class="btn btn-default"
+              >취소</a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

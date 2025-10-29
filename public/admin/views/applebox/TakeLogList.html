@@ -1,0 +1,128 @@
+<!-- 상단 헤더 -->
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>수령 로그</h2>
+    <ol class="breadcrumb">
+      <li>보관함</li>
+      <li class="active"><strong>수령 로그</strong></li>
+    </ol>
+  </div>
+</div>
+
+<!-- 본문 -->
+<div
+  class="wrapper wrapper-content animated fadeInRight"
+  ng-controller="TakeLogCtrl"
+>
+  <div class="ibox">
+    <div class="ibox-title">
+      <h5>수령 로그 검색</h5>
+    </div>
+
+    <!-- 🔍 검색 영역 -->
+    <form class="form-inline" ng-submit="formSubmit()">
+      <div class="form-group">
+        <label for="daterange">기간:</label>
+        <div
+          id="daterange"
+          class="form-control input-sm"
+          style="cursor: pointer"
+        >
+          <span></span> <i class="fa fa-calendar"></i>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-left: 10px">
+        <label for="searchText">검색어:</label>
+        <input
+          type="text"
+          ng-model="sform.searchText"
+          class="form-control input-sm"
+          placeholder="수령자 또는 보관함 라벨"
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-sm btn-primary"
+        style="margin-left: 10px"
+      >
+        <i class="fa fa-search"></i> 검색
+      </button>
+    </form>
+  </div>
+
+  <hr />
+
+  <!-- 📋 수령 내역 테이블 -->
+  <div class="table-responsive" ng-if="pagedList.length">
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th class="text-center">yid</th>
+          <th class="text-center">라벨</th>
+          <th class="text-center">수취인</th>
+          <th class="text-center">행</th>
+          <th class="text-center">열</th>
+          <th class="text-center">점퍼</th>
+          <th class="text-center">시리얼</th>
+          <th class="text-center">수령일</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in pagedList">
+          <td class="text-center">{{ item.yid }}</td>
+          <td class="text-center">{{ item.lockerLabel }}</td>
+          <td class="text-center">{{ item.receiverHp }}</td>
+          <td class="text-center">{{ item.row }}</td>
+          <td class="text-center">{{ item.col }}</td>
+          <td class="text-center">{{ item.jumper }}</td>
+          <td class="text-center">{{ item.serial }}</td>
+          <td class="text-center">{{ toLocalDateString(item.takeDate) }}</td>
+        </tr>
+        <tr ng-if="!pagedList.length">
+          <td colspan="9" class="text-center text-muted">데이터가 없습니다.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 페이지네이션 -->
+  <div class="pagination">
+    <button
+      type="button"
+      class="btn btn-sm btn-default"
+      ng-click="goPage(currentPage-1)"
+      ng-disabled="currentPage === 1"
+    >
+      이전
+    </button>
+    <span>{{currentPage}} / {{totalPages}}</span>
+    <button
+      type="button"
+      class="btn btn-sm btn-default"
+      ng-click="goPage(currentPage+1)"
+      ng-disabled="currentPage === totalPages"
+    >
+      다음
+    </button>
+  </div>
+</div>
+
+<!-- 스타일 -->
+<style>
+  .pagination {
+    position: fixed; /* 화면 기준 고정 */
+    bottom: 15px; /* 화면 하단에서 15px */
+    left: 50%; /* 화면 가로 중앙 */
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+</style>

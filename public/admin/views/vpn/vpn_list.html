@@ -1,0 +1,152 @@
+<div ng-controller="VpnListCtrl">
+  <!-- 페이지 헤더 -->
+  <div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+      <h2>VPN</h2>
+      <ol class="breadcrumb">
+        <li>VPN</li>
+        <li class="active"><strong>VPN 리스트</strong></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox">
+      <div class="ibox-content">
+        <!-- 검색 폼 -->
+        <form
+          class="form-inline m-b-sm"
+          ng-submit="filterList()"
+          style="
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <div>
+            <input
+              type="text"
+              ng-model="keyword"
+              placeholder="IP 또는 위치 검색"
+              class="form-control"
+            />
+            <button type="submit" class="btn btn-primary">검색</button>
+          </div>
+          <div>
+            <a
+              ui-sref="vpn.vpn_edit({ ip: null })"
+              class="btn btn-primary btn-sm"
+              >VPN 등록</a
+            >
+          </div>
+        </form>
+
+        <!-- VPN 서버 테이블 -->
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>IP</th>
+                <th>위치</th>
+                <th>Public Key</th>
+                <th>Private Key</th>
+                <th>주소</th>
+                <th>상태</th>
+                <th>관리</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in pagedList">
+                <td>{{ item.ip }}</td>
+                <td>{{ item.location }}</td>
+                <td>{{ item.publicKey }}</td>
+                <td>{{ item.privateKey }}</td>
+                <td>{{ item.address }}</td>
+                <td>{{ item.status }}</td>
+                <td>
+                  <a
+                    ui-sref="vpn.vpn_edit({ ip: item.ip })"
+                    class="btn btn-xs btn-primary"
+                    >수정</a
+                  >
+                  <button
+                    class="btn btn-xs btn-danger"
+                    ng-click="deleteVpn(item.ip)"
+                  >
+                    삭제
+                  </button>
+                </td>
+              </tr>
+              <tr ng-if="pagedList.length == 0">
+                <td colspan="7" class="text-center">
+                  등록된 VPN 서버가 없습니다.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 페이지네이션 -->
+        <div class="pagination">
+          <button
+            type="button"
+            class="btn btn-sm btn-default"
+            ng-click="goPage(currentPage-1)"
+            ng-disabled="currentPage === 1"
+          >
+            이전
+          </button>
+          <span>{{currentPage}} / {{totalPages}}</span>
+          <button
+            type="button"
+            class="btn btn-sm btn-default"
+            ng-click="goPage(currentPage+1)"
+            ng-disabled="currentPage === totalPages"
+          >
+            다음
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .wrapper-content {
+    min-height: 100vh;
+    background-color: #fff;
+    padding: 15px;
+  }
+
+  /* 검색 폼 */
+  .form-inline.m-b-sm input.form-control {
+    margin-right: 10px;
+  }
+
+  /* 페이지네이션 중앙 고정 + 버튼 클릭 테두리 제거 */
+  .pagination {
+    position: fixed; /* 화면 기준 고정 */
+    bottom: 15px; /* 화면 하단에서 15px */
+    left: 50%; /* 화면 가로 중앙 */
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .pagination .btn {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .pagination .btn:focus {
+    outline: none;
+    box-shadow: none;
+  }
+</style>
